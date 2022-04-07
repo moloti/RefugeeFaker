@@ -2,7 +2,7 @@ import time
 from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.schema import Field, Schema
-from services.custom_providers import AgeCategoryProvider, ChildrenAmountProvider, DisabledProvider, ForeignRelativesProvider, RealLocationProvider
+from services.custom_providers import AgeCategoryProvider, ChildrenAmountProvider, DisabledProvider, ForeignRelativesProvider, RealLocationProvider, TransportationProvider
 
 class RefugeeSchemaGenerator:
     main_localization = 'uk'
@@ -19,7 +19,8 @@ class RefugeeSchemaGenerator:
         ChildrenAmountProvider,
         DisabledProvider,
         ForeignRelativesProvider,
-        RealLocationProvider
+        RealLocationProvider,
+        TransportationProvider
     )
         self.UK_ = Field(locale=self.main_localization)
         self.EN_ = Field(locale=self.second_localization, providers=self.custom_providers)
@@ -58,6 +59,7 @@ class RefugeeSchemaGenerator:
         "gender": gender,
         "age": age,
         "age_category": self.EN_("age_category", age=age),
+        "transportation_available": self.EN_("transportation"),
         "children_amount": self.EN_("children_amount", age=age),
         "disabled": self.EN_("disabled", age=age),
         "foreign_relatives": str(foreign_relatives),

@@ -67,6 +67,17 @@ class RealLocationProvider(BaseProvider):
        return position_object #json.dumps(position_object, separators=(',', ':'))
 
 
+class TransportationProvider(BaseProvider):
+    class Meta:
+        name = "transportation_provider"
+    
+    def __init__(self, seed) -> None:
+        super().__init__(seed=seed)
+
+    def transportation(self):
+        car_available = np.random.choice([False, True], p=[1-0.6, 0.4])
+        return car_available
+
 class ForeignRelativesProvider(BaseProvider):
     class Meta:
         name = "foreign_relatives_provider"
